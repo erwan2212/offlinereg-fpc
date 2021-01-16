@@ -1,0 +1,15 @@
+*.reg
+*.~*
+*.o
+default
+software
+sam
+security
+system
+*.dat
+*temp*
+*.log*
+lib*
+backup*
+*.bat
+*.cmd

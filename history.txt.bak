@@ -1,0 +1,28 @@
+v0.1
+added : getvalue , reg_sz and reg_dword only
+added : setvalue , bug: last char for value is lost / reg_sz only
+
+v0.2
+added : getvalue , reg_binary and reg_multi_sz supported
+added : getvalue will display "valuename"=value
+fixed : setvalue will no longer truncate last char
+
+v0.3
+added : deletevalue
+added : deletekey
+
+v0.4
+added : createkey
+added : setvalue will also work work for reg_dword, reg_multi_sz and reg_binary
+
+v0.5
+added : enumkeys
+added : enumvalues
+added : getvalue, reg_expand_sz supported
+added : setvalue, reg_expand_sz supported
+
+v0.6
+added : hive prefix (HKEY_LOCAL_MACHINE, etc) are now handled as well
+
+v0.7
+added : currentcontrolset will be mapped to the right controlset
