@@ -9,12 +9,134 @@
         <Filename Value="offlinereg.dpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="15" Y="9"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="1027"/>
+        <CursorPos X="37" Y="1040"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="663" Column="19" TopLine="645"/>
+      </Position1>
+      <Position2>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="664" Column="35" TopLine="645"/>
+      </Position2>
+      <Position3>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="668" Column="28" TopLine="646"/>
+      </Position3>
+      <Position4>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="744" Column="55" TopLine="721"/>
+      </Position4>
+      <Position5>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="967" Column="61" TopLine="961"/>
+      </Position5>
+      <Position6>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="871" Column="10" TopLine="869"/>
+      </Position6>
+      <Position7>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="949" Column="10" TopLine="959"/>
+      </Position7>
+      <Position8>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="900" Column="26" TopLine="888"/>
+      </Position8>
+      <Position9>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="205" Column="22" TopLine="186"/>
+      </Position9>
+      <Position10>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="974" Column="46" TopLine="963"/>
+      </Position10>
+      <Position11>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="900" Column="27" TopLine="885"/>
+      </Position11>
+      <Position12>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="963" Column="5" TopLine="969"/>
+      </Position12>
+      <Position13>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="871" TopLine="848"/>
+      </Position13>
+      <Position14>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="990" Column="10" TopLine="980"/>
+      </Position14>
+      <Position15>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="994" Column="3" TopLine="974"/>
+      </Position15>
+      <Position16>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="875" TopLine="862"/>
+      </Position16>
+      <Position17>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="981" Column="12" TopLine="974"/>
+      </Position17>
+      <Position18>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="990" Column="8" TopLine="977"/>
+      </Position18>
+      <Position19>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="877" TopLine="859"/>
+      </Position19>
+      <Position20>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="1014" Column="20" TopLine="989"/>
+      </Position20>
+      <Position21>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="908" Column="23" TopLine="877"/>
+      </Position21>
+      <Position22>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="289" Column="10" TopLine="294"/>
+      </Position22>
+      <Position23>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="993" Column="17" TopLine="982"/>
+      </Position23>
+      <Position24>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="1008" Column="20" TopLine="986"/>
+      </Position24>
+      <Position25>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="871" TopLine="870"/>
+      </Position25>
+      <Position26>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="1010" Column="48" TopLine="1160"/>
+      </Position26>
+      <Position27>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="10" Column="56"/>
+      </Position27>
+      <Position28>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="890" Column="11" TopLine="877"/>
+      </Position28>
+      <Position29>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="893" Column="9" TopLine="883"/>
+      </Position29>
+      <Position30>
+        <Filename Value="offlinereg.dpr"/>
+        <Caret Line="1006" Column="12" TopLine="993"/>
+      </Position30>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>

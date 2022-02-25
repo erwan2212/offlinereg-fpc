@@ -457,6 +457,7 @@ list:tstrings;
 idx:word;
 hcreatedkey:thandle;
 begin
+//writeln('createkeys:'+skeyname+';');
 if skeyname ='' then exit;
 hcreatedkey:=0;
 list:=tstringlist.create;
@@ -598,6 +599,7 @@ t:tstrings;
 binary:array of byte;
 i:integer;
 begin
+//writeln('setvalue:'+svaluename+';'+svalue);
 result:=false;
 try
 if svaluename=' ' then svaluename:='';
@@ -866,6 +868,8 @@ begin
 end;//if pos
 end;
 
+
+
 function wideSmallFileFindAndReplace(FileName, Find_, ReplaceWith: string):boolean;
 var
 f:textfile;
@@ -943,6 +947,22 @@ begin
 end;
 }
 
+function ReadUCS2FileToUTF8(const FilePath: string): UTF8String;
+var
+  f: TFileStream;
+  d: WideString;
+begin
+  f := TFileStream.Create(FilePath, fmOpenRead or fmShareDenyWrite);
+  try
+    SetLength(d, f.Size div SizeOf(WideChar));
+    if Length(d) > 0 then
+      f.ReadBuffer(d[1], Length(d) * SizeOf(WideChar));
+  finally
+    f.Free;
+  end;
+  Result := UTF8Encode(d);
+end;
+
 
 function import(hkey:thandle;filename:string):boolean;
 var
@@ -957,21 +977,48 @@ hkresult,hcreatedkey:thandle;
 value_type:cardinal;
 //
 f_in,f_out:textfile;
+f:textfile;
+c1,c2:char;
 //
 fs: TFileStream;
 begin
 result:=false;
 {$i-}deletefile(pchar(FileName+'.new'));{$i+}
-if wideSmallFileFindAndReplace(filename,'\'+#13#10,'')=false then
+
+assignfile(f,filename);
+reset(f);
+read(f,c1);read(f,c2);
+closefile(f);
+
+writeln(ord(c1));
+writeln(ord(c2));
+
+if (c1=chr($ff)) and (c2=chr($fe)) then //ucs-2
+   begin
+   //writeln('ucs2');
+   tmp:= ReadUCS2FileToUTF8(filename);
+   s:=TStringList.Create;
+   s.Text :=tmp;
+   s.Text := newstringreplace(s.Text ,'\'+#13#10,'',[rfReplaceAll, rfIgnoreCase]);
+   s.Text := newstringreplace(s.Text ,',  ',',',[rfReplaceAll, rfIgnoreCase]);
+   s.SaveToFile (FileName+'.new');
+   s.Free;
+   //readln;
+   end;
+
+//if wideSmallFileFindAndReplace(filename,'\'+#13#10,'')=false then
+if (c1<>chr($ff)) or (c2<>chr($fe)) then //not ucs-2
   begin
-  //writeln('creating: '+ FileName+'.new' );
+  //writeln('not ucs2');
   s:=TStringList.Create;
   s.LoadFromFile(FileName);
   s.Text := newstringreplace(s.Text ,'\'+#13#10,'',[rfReplaceAll, rfIgnoreCase]);
   s.Text := newstringreplace(s.Text ,',  ',',',[rfReplaceAll, rfIgnoreCase]);
   s.SaveToFile(FileName+'.new');
   s.Free;
+  //readln;
   end;
+
 if fileexists(filename+'.new')
   then ini:=tinifile.Create(filename+'.new')
   else ini:=tinifile.Create(filename);
@@ -990,11 +1037,13 @@ for i:=0 to sections.Count -1 do
   if uppercase(key)='HKEY_LOCAL_MACHINE\SECURITY' then key:='';
   if uppercase(key)='HKEY_LOCAL_MACHINE\SOFTWARE' then key:='';
   if uppercase(key)='HKEY_LOCAL_MACHINE\SYSTEM' then key:='';
+  if uppercase(key)='HKEY_USERS\.DEFAULT' then key:='';
   values:=tstringlist.Create ;
   //ini.ReadSection(sections[i],values);
   ini.ReadSectionValues(sections[i],values);
   //if values.Count =0 then createkey(hkey,key,hcreatedkey);
-  if key[1]='-'
+  //writeln('key.'+key+'.');
+  if (key<>'') and (key[1]='-')
      then
      begin
      delete(key,1,1);
@@ -1008,7 +1057,8 @@ for i:=0 to sections.Count -1 do
        end;
      deletekey (hkey,key);
      end
-     else if key[1]<>';' then createkeys(hkey,key); //for section create the multi level path key
+     else if (key<>'') and (key[1]<>';') then createkeys(hkey,key); //for section create the multi level path key
+
   if values.Count >0 then
   begin
   for j:=0 to values.count -1 do
@@ -1063,6 +1113,7 @@ for i:=0 to sections.Count -1 do
     if (value_type =reg_sz) then
       begin
       //writeln(value+'.'); //debug
+      value:=StringReplace(value,'\\','\',[rfReplaceAll]);
       if value='' then value :=chr(0);
       //do we have a comment at the end of the string
       if value[1]='"' then
@@ -1112,15 +1163,16 @@ for i:=0 to sections.Count -1 do
       end;
     if ret=0 then
       begin
-      if subkey='@' then subkey:='';
-
-      if (subkey[1]<>';') and (value[1]='-') then
+      if subkey='@' then subkey:=' '; //default
+      //writeln('value:'+value);
+      //writeln('subkey:'+subkey);
+      if (subkey<>'') and (subkey[1]<>';') and (value[1]='-') then
          begin
          writeln('deletevalue:'+subkey);
          deletevalue  (hkresult,subkey) ;
          end;
-
-      if (subkey[1]<>';') and (subkey[1]<>'-') and (value<>'-')
+      //!!!! if (subkey<>'') below is WRONG and will prevent default values !!!!!!
+      if (subkey<>'') and (subkey[1]<>';') and (subkey[1]<>'-') and (value<>'-')
          then if setvalue(hkresult ,subkey,value,value_type )=true
               then writeln('added -> '+subkey+'='+svalue_type+':'+value);
       ret:=ORcloseKey (hkresult);
